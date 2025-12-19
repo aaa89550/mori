@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MORI作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        .filter-btn.active {
+            background-color: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .portfolio-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .img-container img {
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover .img-container img {
+            transform: scale(1.1);
+        }
+
+        /* 燈箱樣式 */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        #lightbox img {
+            max-width: 85%;
+            max-height: 80vh;
+            object-fit: contain;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-[0.2em]">MORI作品集</h1>
+            <div class="space-x-10 hidden md:flex text-sm font-medium tracking-widest">
+                <a href="#gallery" class="hover:text-gray-400 transition">作品</a>
+                <a href="#about" class="hover:text-gray-400 transition">關於</a>
+                <a href="mailto:yourname@example.com" class="hover:text-gray-400 transition">聯絡</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 標題區 -->
+    <header class="pt-48 pb-24 px-8">
+        <div class="max-w-7xl mx-auto">
+            <span class="text-sm tracking-[0.3em] text-gray-400 mb-4 block">視覺設計與插畫創作</span>
+            <h2 class="text-6xl md:text-8xl font-bold mb-10 leading-tight">
+                用設計<br><span class="text-gray-300">說故事。</span>
+            </h2>
+            
+            <!-- 分類過濾器 -->
+            <div class="flex flex-wrap gap-4 mt-20" id="filterGroup">
+                <button onclick="filterWorks('all')" class="filter-btn active px-8 py-2 rounded-full border border-gray-200 text-sm tracking-widest transition-all">ALL</button>
+                <button onclick="filterWorks('logo')" class="filter-btn px-8 py-2 rounded-full border border-gray-200 text-sm tracking-widest transition-all">LOGO</button>
+                <button onclick="filterWorks('illustration')" class="filter-btn px-8 py-2 rounded-full border border-gray-200 text-sm tracking-widest transition-all">ILLUSTRATION</button>
+                <button onclick="filterWorks('social')" class="filter-btn px-8 py-2 rounded-full border border-gray-200 text-sm tracking-widest transition-all">SOCIAL MEDIA</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 作品展示區 -->
+    <main id="gallery" class="max-w-7xl mx-auto px-8 pb-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16" id="portfolioGrid">
+            <!-- 作品將由 JavaScript 動態生成 -->
+        </div>
+    </main>
+
+    <!-- 關於我 -->
+    <section id="about" class="bg-gray-50 py-32 px-8">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            <div class="w-full md:w-1/2">
+                <h3 class="text-4xl font-bold mb-8">關於我</h3>
+                <p class="text-gray-500 leading-relaxed mb-6 text-lg">
+                    我是視覺設計師，專注於品牌識別、插畫與社群媒體設計。我相信好的設計不只是視覺上的美感，更是一種精準的溝通工具。
+                </p>
+                <div class="grid grid-cols-2 gap-8 mt-10">
+                    <div>
+                        <h4 class="font-bold mb-2">專業領域</h4>
+                        <ul class="text-sm text-gray-500 space-y-1">
+                            <li>品牌識別設計</li>
+                            <li>數位插畫創作</li>
+                            <li>社群視覺設計</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">使用工具</h4>
+                        <ul class="text-sm text-gray-500 space-y-1">
+                            <li>Adobe Illustrator</li>
+                            <li>Photoshop</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 rounded-2xl overflow-hidden transition duration-700">
+                <img src="狸貓的葉子_LOGO.jpg" alt="MORI Logo" class="w-full h-full object-contain">
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="py-20 text-center border-t border-gray-100">
+        <div class="flex justify-center space-x-8 mb-8">
+            <a href="#" class="hover:opacity-50 transition"><i class="fab fa-behance text-2xl"></i></a>
+            <a href="#" class="hover:opacity-50 transition"><i class="fab fa-instagram text-2xl"></i></a>
+            <a href="#" class="hover:opacity-50 transition"><i class="fab fa-linkedin-in text-2xl"></i></a>
+        </div>
+        <p class="text-xs tracking-widest text-gray-400">© 2025 MORI作品集。版權所有。</p>
+    </footer>
+
+    <!-- 燈箱彈出層 -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-10 right-10 text-2xl text-gray-900 hover:rotate-90 transition-transform duration-300">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightboxImg" src="" alt="放大預覽">
+    </div>
+
+    <script>
+        // 作品資料庫：按文件大小排序（從小到大）
+        const works = [
+            { src: "social/487506420_9423854314350792_2814443565945467148_n.jpg", category: "social" },
+            { src: "social/584372657_1475611024011321_4329516656645576707_n.jpg", category: "social" },
+            { src: "logo/302918621_473453128126937_1499633579513182110_n.jpg", category: "logo" },
+            { src: "illustration/485204086_1153701756768734_2189796899330629986_n.jpg", category: "illustration" },
+            { src: "illustration/487205859_9425566324179591_939296927774357726_n.jpg", category: "illustration" },
+            { src: "illustration/492046738_1178438424295067_7615852346002629153_n.jpg", category: "illustration" },
+            { src: "illustration/487678509_9425566077512949_3836761737149443824_n.jpg", category: "illustration" },
+            { src: "social/489918657_1281321680106924_1228659813135816355_n.jpg", category: "social" },
+            { src: "social/480730131_1237337361172023_2571881541650922053_n.jpg", category: "social" },
+            { src: "illustration/483106726_1145819314223645_8734750472289413945_n.jpg", category: "illustration" },
+            { src: "illustration/488639654_9456452427757647_4204190875918216676_n.jpg", category: "illustration" },
+            { src: "logo/lalaland logo_final.png", category: "logo" },
+            { src: "illustration/485672061_1153666843438892_680484549869080285_n.jpg", category: "illustration" },
+            { src: "social/487316795_1271501467755612_6517660254510292202_n.jpg", category: "social" },
+            { src: "illustration/482238647_1144460154359561_8635858969912935185_n.jpg", category: "illustration" },
+            { src: "social/485160267_1150030723802504_5363419230484294402_n.jpg", category: "social" },
+            { src: "social/484795686_1150030760469167_8015764892884481438_n.jpg", category: "social" },
+            { src: "social/482247555_1150030750469168_1935550218957501627_n.jpg", category: "social" },
+            { src: "social/485032726_1150030937135816_3334825586903148123_n.jpg", category: "social" },
+            { src: "social/482246615_1150030757135834_7288299873095947671_n.jpg", category: "social" },
+            { src: "illustration/3d426170fe0b9e06.png", category: "illustration" }
+        ];
+
+        const grid = document.getElementById('portfolioGrid');
+
+        // 生成作品卡片的函式
+        function renderWorks(filter = 'all') {
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? works : works.filter(w => w.category === filter);
+
+            filtered.forEach((work) => {
+                const item = document.createElement('div');
+                item.className = "portfolio-item group cursor-pointer";
+                item.innerHTML = `
+                    <div class="img-container relative overflow-hidden rounded-lg mb-5">
+                        <img src="${work.src}" alt="" class="w-full h-full object-contain" loading="lazy">
+                        <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity"></div
+                `;
+                item.onclick = () => openLightbox(work.src);
+                grid.appendChild(item);
+            });
+        }
+
+        function getCategoryName(cat) {
+            const names = {
+                'logo': 'LOGO DESIGN',
+                'illustration': 'ILLUSTRATION',
+                'social': 'SOCIAL MEDIA'
+            };
+            return names[cat] || 'VISUAL';
+        }
+
+        // 過濾功能
+        window.filterWorks = function(category) {
+            // 更新按鈕狀態
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // 重新渲染作品
+            renderWorks(category);
+        };
+
+        // 燈箱控制
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // 初始載入
+        renderWorks();
+    </script>
+</body>
+</html>
